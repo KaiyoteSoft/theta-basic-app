@@ -1,6 +1,9 @@
-# theta_v_basic_app
+#  RICOH THETA BASIC APP
 
-A new Flutter application.
+A simple Flutter application that utilizes the RICOH THETA API to change certain camera settings.
+
+## Mobile App (Work in Progress)
+![screenshot of mobile app](images/mobileAppScreenshot.JPG)
 
 ## Getting Started
 
