@@ -1,146 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'dart:convert';
-import 'dart:async';
-import 'package:theta_v_basic_app/checkConnection.dart';
-import 'package:theta_v_basic_app/takePicture.dart';
-import 'package:theta_v_basic_app/state.dart';
-import 'package:theta_v_basic_app/displayImage.dart';
-
+import './screens/screen_home.dart';
+//import './screens/screen_1.dart';
+import './screens/screen_2.dart';
+import './screens/screen_3.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RICOH THETA V Basic App',
-      home: MyHomePage(title: 'RICOH THETA V Basic App'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  String connectionStatus = 'Connect to the camera Wifi!';
-
-  void checkConnection() async {
-    var url = 'http://192.168.1.1/osc/info';
-//    var response = await http.get(url);
-//
-//    if (response.statusCode == 200) {
-//      String message = 'The camera is connected!';
-//      print(message);
-//     setState(() {
-//       connectionStatus = message;
-//     });
-//    }
-    try {
-      final response =  await http.get(url);
-      setState(() {
-        connectionStatus = 'The camera is connected!';
-      });
-    } on SocketException {
-      print('No internet connection');
-      setState(() {
-        connectionStatus = '!! Connect to the camera Wifi !!!!';
-      });
-    }
-
-
-//  prettyPrint(response.body);
-  }
-
-
-
-  @override
-  void initState() {
-    checkConnection();
-    super.initState();
-  }
-
-
-  var imageUrl = 'https://picsum.photos/200/300';
-  String outputText = 'Camera output displayed here';
-
-  void getImage() async {
-    var changedUrl = await displayFile();
-    setState(() {
-      imageUrl = changedUrl;
-    });
-    print("change Image");
-  }
-
-  void changeMessage() async {
-    var changedText = await state();
-    setState(() {
-      outputText = changedText;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.blue[300],
-      ),
-      backgroundColor: Colors.blue[50],
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(connectionStatus),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              child: Image.network(imageUrl),
-            ),
-            Text(
-              'Basic RICOH THETA Functions',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                fontFamily: 'Source Sans Pro'
-              ),
-            ),
-            RaisedButton(
-              onPressed:() {
-                takePicture();
-                },
-              child: Text("Take a picture!"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                changeMessage();
-              },
-              child: Text("Get the state"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                getImage();
-//              displayFile();
-              },
-              child: Text("Display last image")
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Text(outputText),
-            ),
-          ],
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => MyHomePage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/second': (context) => ScreenTwo(),
+        '/third':(context) => ScreenThree()
+      },
     );
   }
 }
