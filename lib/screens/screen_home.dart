@@ -5,8 +5,10 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:theta_v_basic_app/checkConnection.dart';
 import 'package:theta_v_basic_app/takePicture.dart';
-import 'package:theta_v_basic_app/state.dart';
 import 'package:theta_v_basic_app/displayImage.dart';
+import 'package:theta_v_basic_app/main.dart';
+
+
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -37,9 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-
   var imageUrl = 'https://picsum.photos/200/300';
-  String outputText = 'Camera output displayed here';
 
   void getImage() async {
     var changedUrl = await displayFile();
@@ -49,26 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
     print("change Image");
   }
 
-  void changeMessage() async {
-    var changedText = await state();
-    setState(() {
-      outputText = changedText;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[300],
-        leading: FlatButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/second');
-          },
-          child: Icon(Icons.arrow_forward),
-        ),
-        title: Text('RICOH THETA Basic App'),
-      ),
+      appBar: generateAppBar('RICOH THETA BASIC APP', context, '/second'),
       backgroundColor: Colors.blue[50],
       body: Center(
         child: Column(
@@ -94,21 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Take a picture!"),
             ),
             RaisedButton(
-              onPressed: () {
-                changeMessage();
-              },
-              child: Text("Get the state"),
-            ),
-            RaisedButton(
                 onPressed: () {
                   getImage();
 //              displayFile();
                 },
                 child: Text("Display last image")
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Text(outputText),
             ),
           ],
         ),

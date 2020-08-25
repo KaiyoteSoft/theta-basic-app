@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:theta_v_basic_app/pretty_print.dart';
 
@@ -6,5 +7,5 @@ Future<String> state() async {
   var response = await http.post(url);
 
 //  prettyPrint(response.body);
-  return response.body;
+  return outputPrettyPrint(response.body);
 }

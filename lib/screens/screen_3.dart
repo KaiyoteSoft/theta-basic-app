@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theta_v_basic_app/main.dart';
 
 class ScreenThree extends StatefulWidget {
   @override
@@ -17,9 +18,7 @@ class _ScreenThreeState extends State<ScreenThree> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Screen 3"),
-        ),
+        appBar: generateAppBar('Change Camera Settings', context, '/'),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

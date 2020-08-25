@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import './screens/screen_home.dart';
-//import './screens/screen_1.dart';
 import './screens/screen_2.dart';
 import './screens/screen_3.dart';
+
+Widget generateAppBar(String titleText, BuildContext context, String screenName) {
+  return AppBar(
+    title: Text(titleText),
+    backgroundColor: Colors.blue[300],
+    actions: [FlatButton(
+      onPressed: () {
+        Navigator.pushNamed(context, screenName);
+      },
+      child: Icon(Icons.arrow_forward),
+    ),
+    ],
+  );
+}
 
 void main() {
   runApp(MyApp());
