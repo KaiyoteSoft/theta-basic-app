@@ -7,7 +7,9 @@ import 'package:theta_v_basic_app/checkConnection.dart';
 import 'package:theta_v_basic_app/takePicture.dart';
 import 'package:theta_v_basic_app/displayImage.dart';
 import 'package:theta_v_basic_app/main.dart';
-
+import 'package:theta_v_basic_app/startCapture.dart';
+import 'package:theta_v_basic_app/stopCapture.dart';
+import 'package:theta_v_basic_app/toggleMode.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -71,19 +73,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: 'Source Sans Pro'
               ),
             ),
-            RaisedButton(
-              onPressed:() {
-                takePicture();
-              },
-              child: Text("Take a picture!"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                generateActionButton(takePicture, 'Take Picture'),
+                generateActionButton(toggleMode, 'Toggle Shooting Modes'),
+              ],
             ),
-            RaisedButton(
-                onPressed: () {
-                  getImage();
-//              displayFile();
-                },
-                child: Text("Display last image")
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                generateActionButton(startCapture, 'Start Video'),
+                generateActionButton(stopCapture, 'STOP Video'),
+              ],
             ),
+            generateActionButton(getImage, 'Display last image'),
           ],
         ),
       ),

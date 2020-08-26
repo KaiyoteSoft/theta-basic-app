@@ -17,6 +17,15 @@ Widget generateAppBar(String titleText, BuildContext context, String screenName)
   );
 }
 
+Widget generateActionButton(Function functionName, String buttonText) {
+  return RaisedButton(
+    onPressed: () {
+      functionName();
+    },
+    child: Text(buttonText),
+  );
+}
+
 void main() {
   runApp(MyApp());
 }

@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:theta_v_basic_app/pretty_print.dart';
 import 'package:theta_v_basic_app/state.dart';
 import 'package:theta_v_basic_app/info.dart';
-import 'dart:io';
-import 'package:theta_v_basic_app/state.dart';
+import 'package:theta_v_basic_app/getOptions.dart';
 import 'package:theta_v_basic_app/main.dart';
 
 class ScreenTwo extends StatefulWidget {
@@ -31,21 +30,34 @@ class _ScreenTwoState extends State<ScreenTwo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RaisedButton(
-              onPressed: () {
-                changeMessage(state);
-              },
-              child: Text("Get the state"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                    changeMessage(state);
+                  },
+                  child: Text("Get the state"),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    changeMessage(info);
+                  },
+                  child: Text('Get info'),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    changeMessage(getOptions);
+                  },
+                  child: Text('List camera options'),
+                ),
+              ],
             ),
-            RaisedButton(
-              onPressed: () {
-                changeMessage(info);
-              },
-              child: Text('Get info'),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Text(outputText),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                child: Text(outputText),
+              ),
             ),
           ],
         ),
