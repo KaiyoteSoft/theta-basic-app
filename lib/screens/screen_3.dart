@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:theta_v_basic_app/get_timeshift.dart';
 import 'package:theta_v_basic_app/main.dart';
+import 'package:theta_v_basic_app/screens/screen_home.dart';
+import 'package:theta_v_basic_app/toggle_hdr.dart';
+import 'dart:async';
 
 class ScreenThree extends StatefulWidget {
   @override
@@ -8,12 +12,7 @@ class ScreenThree extends StatefulWidget {
 
 class _ScreenThreeState extends State<ScreenThree> {
   int number = 2;
-
-  void changePicture() {
-    setState(() {
-      number = number + 1;
-    });
-  }
+  String textFromFunction = '';
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +23,16 @@ class _ScreenThreeState extends State<ScreenThree> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.network("https://picsum.photos/seed/$number/100/100"),
-                  Image.network("https://picsum.photos/seed/${number + 1}/100/100"),
-                  Image.network("https://picsum.photos/seed/${number + 2}/100/100"),
+                  RaisedButton(
+                    onPressed: () {
+                      filterToggle();
+                      Navigator.pushNamed(context, '/');
+                    },
+                    child: Text('Toggle HDR'),
+                  ),
+                  generateActionButton(disableTimer, 'Disable Timer'),
                 ],
               ),
               Row(
@@ -40,7 +44,7 @@ class _ScreenThreeState extends State<ScreenThree> {
                 ],
               ),
               FlatButton(
-                  onPressed: changePicture,
+                  onPressed: () {},
                   child: Text("Button 3")
               )
             ],

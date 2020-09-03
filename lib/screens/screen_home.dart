@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
+import 'package:theta_v_basic_app/components/output_text.dart';
+
 import 'package:theta_v_basic_app/checkConnection.dart';
 import 'package:theta_v_basic_app/takePicture.dart';
 import 'package:theta_v_basic_app/displayImage.dart';
@@ -19,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String connectionStatus = 'Connect to the camera Wifi!';
+  String hdrStatus = '';
 
   void checkConnection() async {
     var url = 'http://192.168.1.1/osc/info';
@@ -35,9 +38,36 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<String> getHdr() async {
+    var url = 'http://192.168.1.1/osc/commands/execute';
+
+    Map data = {
+      'name': 'camera.getOptions',
+      'parameters': {
+        'optionNames': [
+          "_filter",
+        ]
+      }
+    };
+
+    //encode Map to JSON
+    var body = jsonEncode(data);
+
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json;charset=utf-8"}, body: body);
+    Map<String, dynamic> hdrType = jsonDecode(response.body);
+    String hdrState = hdrType['results']['options']['_filter'];
+    setState(() {
+      hdrStatus = 'HDR is $hdrState';
+    });
+
+    return 'HDR is: $hdrState';
+  }
+
   @override
   void initState() {
     checkConnection();
+    getHdr();
     super.initState();
   }
 
@@ -61,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(connectionStatus),
+            Text(hdrStatus),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
               child: Image.network(imageUrl),

@@ -53,6 +53,16 @@ class _ScreenTwoState extends State<ScreenTwo> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                  },
+                  child: Text('Status Button (broken)'),
+                ),
+              ],
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

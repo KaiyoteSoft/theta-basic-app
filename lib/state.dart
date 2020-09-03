@@ -6,6 +6,6 @@ Future<String> state() async {
   var url = 'http://192.168.1.1/osc/state';
   var response = await http.post(url);
 
-//  prettyPrint(response.body);
+  prettyPrint(response.body);
   return outputPrettyPrint(response.body);
 }
